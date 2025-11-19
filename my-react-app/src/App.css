@@ -1,0 +1,351 @@
+.App {
+  text-align: center;
+}
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.landing-page {
+  min-height: 100vh;
+  background: url('../public/pexels-smepictures-13016396.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none; /* Remove underline */
+  color: white; /* Make text white */
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: gray; /* Gray color on hover */
+}
+
+
+.login-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-button:hover {
+  background-color: #2563eb;
+}
+
+.hero-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-section h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #2563eb;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column; /* Stack posts vertically */
+  gap: 20px;
+  padding: 20px;
+  max-width: 100%; /* Ensure posts fill the width of the screen */
+  overflow-y: auto; /* Allow vertical scrolling */
+  height: 100vh; /* Full viewport height */
+  justify-content: flex-start;
+  margin: 0 auto;
+}
+
+.post-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px; /* Increased padding for better spacing */
+  width: 100%;
+  max-width: 700px; /* Increased width for a larger view */
+  margin: 0 auto;
+  height: 350px; /* Increased height of the post card */
+}
+
+.post-card:hover {
+  transform: scale(1.05);
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Increased space between profile and post content */
+}
+
+.profile-pic {
+  width: 60px; /* Larger profile image */
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 20px; /* Increased space from the name */
+  border: 3px solid #ddd;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 1.2rem; /* Increased font size for better readability */
+}
+
+.post-description {
+  font-size: 1rem; /* Larger font size for description */
+  color: #555;
+  margin-bottom: 20px; /* Increased space between description and image */
+}
+
+.post-image {
+  width: 100%;
+  height: 200px; /* Fixed height for the post image */
+  object-fit: cover; /* Ensure the image is fully covered */
+  display: block;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+/* Portfolio Page Styles */
+.portfolio-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Card Styling */
+.portfolio-card {
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+
+.create-portfolio {
+  background: #f5f5f5;
+  border: 2px dashed #888;
+  cursor: pointer;
+}
+
+.create-btn {
+  font-size: 2rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-btn:hover {
+  background: #0056b3;
+}
+
+/* Portfolio Details */
+.portfolio-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.portfolio-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.portfolio-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+
+.portfolio-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.about-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.services-section {
+  margin-top: 40px;
+}
+
+.services-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  width: 25%;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  text-align: center;
+  color: #333;
+}
+
+.service-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.service-card ul li {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.contact-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.contact-info {
+  margin-bottom: 30px;
+}
+
+.contact-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.contact-form-section {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.submit-button {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-button:hover {
+  background: #555;
+}
+
+
+
+
