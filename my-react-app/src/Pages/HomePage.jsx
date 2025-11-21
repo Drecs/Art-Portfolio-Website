@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "./Layout"; 
-import "../App.css"; 
+import Layout from "./Layout";
+import "../index.css";
 
 export default function HomePage() {
   // Sample posts data
@@ -43,13 +43,17 @@ export default function HomePage() {
               <img src={post.profilePic} alt="Profile" className="profile-pic" />
               <span className="profile-name">{post.name}</span>
             </div>
-            <div className="post-description">{post.description}</div>
+
             <img src={post.postImage} alt="Post" className="post-image" />
+
+            <div className="post-description">{post.description}</div>
+
+
           </div>
         ))}
       </div>
-      </Layout> 
+    </Layout>
   );
- 
+
 }
 

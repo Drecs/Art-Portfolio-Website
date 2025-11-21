@@ -1,0 +1,249 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ROOT */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: white;
+}
+
+/* PAGE WRAPPER */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: #646cff;
+}
+
+.login-button {
+  background-color: #646cff;
+  color: white;
+}
+
+/* HERO SECTION */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 2rem;
+}
+
+.hero-section h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-color: #646cff;
+  color: white;
+}
+
+/* GLOBAL BUTTON STYLE */
+button,
+.login-button,
+.cta-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+button:hover,
+.login-button:hover,
+.cta-button:hover {
+  background-color: #4a50e0;
+}
+
+/* HERO CARD */
+.hero-card {
+  background: rgba(0, 0, 0, 0.55);
+  /* Semi-transparent black */
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* HOME PAGE FEED CONTAINER */
+.home-container {
+  width: 100%;
+  max-width: 600px;
+  /* feed stays centered like social apps */
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* spacing between cards */
+}
+
+
+
+/* POST CARD */
+.post-card {
+  background: rgba(0, 0, 0, 0.25);
+  /* soft transparent dark */
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* subtle border */
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.post-card:hover {
+  transform: scale(1.01);
+  background: rgba(0, 0, 0, 0.35);
+  /* slightly darker on hover */
+}
+
+
+/* POST IMAGE */
+.post-image {
+  width: 100%;
+  border-radius: 10px;
+  margin: 0.5rem 0 0.75rem 0;
+  object-fit: cover;
+}
+
+
+/* PROFILE ROW AT THE TOP OF CARD */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ROUND PROFILE IMAGE */
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #646cff;
+}
+
+/* PROFILE NAME */
+.profile-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* POST IMAGE */
+.post-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0.75rem;
+  object-fit: cover;
+}
+
+/* DESCRIPTION BELOW IMAGE */
+.post-description {
+  font-size: 0.95rem;
+  margin-top: 0.75rem;
+  line-height: 1.4;
+  color: #e8e8e8;
+}
+
+/* MAIN NAVBAR FOR OTHER PAGES */
+.main-navbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* Centers the nav-links container */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: black;
+  /* Black navbar */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Brand/logo on the left */
+.navbar-left {
+  position: absolute;
+  left: 2rem;
+}
+
+.main-navbar .brand {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Centered nav links */
+.centered-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.centered-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.centered-links a:hover {
+  color: #646cff;
+}

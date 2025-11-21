@@ -1,20 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../App.css";
+import "../index.css";
 
 export default function Layout({ children }) {
   return (
     <div>
       {/* Navigation Bar */}
-      <nav className="navbar">
-        <h1 className="brand">LokinMedia</h1>
-        <ul className="nav-links">
+      <nav className="main-navbar">
+        <div className="navbar-left">
+          <h1 className="brand">LokinMedia</h1>
+        </div>
+        <ul className="nav-links centered-links">
           <li><Link to="/home">Home</Link></li>
           <li><Link to="/portfolios">Portfolios</Link></li>
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
         </ul>
-        <button className="login-button">Log In</button>
       </nav>
 
       {/* Render the children pages */}

@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./Pages/LandingPage";
-import HomePage from "./Pages/HomePage";
-import Portfolio from "./Pages/Portfolio"; 
-import About from "./Pages/About"; 
-import Contact from "./Pages/Contact"; 
+import LandingPage from "./Pages/LandingPage.jsx";
+import HomePage from "./Pages/HomePage.jsx";
+import Portfolio from "./Pages/Portfolio.jsx";
+import About from "./Pages/About.jsx";
+import Contact from "./Pages/Contact.jsx";
+
 
 function App() {
   return (
@@ -22,3 +23,4 @@ function App() {
 }
 
 export default App;
+

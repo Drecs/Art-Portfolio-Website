@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "./Layout";
-import "../App.css"; 
+import "../index.css";
 
 export default function Portfolio() {
   // Sample portfolio data
@@ -12,7 +12,7 @@ export default function Portfolio() {
   };
 
   return (
-<Layout>
+    <Layout>
 
       {/* Portfolio Section */}
       <div className="portfolio-container">
@@ -28,7 +28,7 @@ export default function Portfolio() {
             <img src={portfolio.profilePic} alt="Profile" className="portfolio-profile-pic" />
             <div className="portfolio-info">
               <h3>{portfolio.name}</h3>
-              </div>
+            </div>
           </div>
           <p className="portfolio-description">{portfolio.description}</p>
         </div>
