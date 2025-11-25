@@ -6,7 +6,7 @@ export default function About() {
   return (
     <Layout>
       <div className="about-container">
-        {/* About Us Section */}
+        {/* About Us Section (not in a card) */}
         <section className="about-section">
           <h2>About Us</h2>
           <p>

@@ -30,29 +30,24 @@ export default function HomePage() {
 
   return (
     <Layout>
+      <div className="home-page">
+        <div className="home-container">
+          {posts.map((post) => (
+            <div key={post.id} className="post-card">
+              <div className="profile-section">
+                <img src={post.profilePic} className="profile-pic" />
+                <span className="profile-name">{post.name}</span>
+              </div>
 
-      {/* Posts Section */}
-      <div className="home-container">
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            className="post-card"
-            onClick={() => window.location.href = `/post/${post.id}`} // Navigate on click
-          >
-            <div className="profile-section">
-              <img src={post.profilePic} alt="Profile" className="profile-pic" />
-              <span className="profile-name">{post.name}</span>
+              <img src={post.postImage} className="post-image" />
+
+              <div className="post-description">{post.description}</div>
             </div>
-
-            <img src={post.postImage} alt="Post" className="post-image" />
-
-            <div className="post-description">{post.description}</div>
-
-
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </Layout>
+
   );
 
 }
