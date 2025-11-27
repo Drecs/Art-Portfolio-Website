@@ -1,33 +1,17 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
+const authRoutes = require("./routes/authRoutes");
 
-// load .env from project root
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
-
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+require("dotenv").config({ path: "../.env" });  // your global env
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("Server is running with Prisma + PostgreSQL!");
-});
+// Routes
+app.use("/api/auth", authRoutes);
 
-// Example: get all users
-app.get("/users", async (req, res) => {
-    try {
-        const users = await prisma.user.findMany();
-        res.json(users);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+app.get("/", (req, res) => res.send("API is running"));
 
-const PORT = 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
