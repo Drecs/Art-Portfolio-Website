@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
 import bgImage from "../assets/backgroundimage.jpg";
 
 export default function LandingPage() {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+
   return (
-    <div className="landing-page"
-      style={{ backgroundImage: `url(${bgImage})` }}
-    >
-      {/* Navigation Bar */}
+    <div className="landing-page" style={{ backgroundImage: `url(${bgImage})` }}>
+      
+      {/* Navbar */}
       <nav className="navbar">
         <h1 className="brand">LokinMedia</h1>
         <ul className="nav-links">
@@ -17,7 +19,7 @@ export default function LandingPage() {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
         </ul>
-        <button className="login-button">Log In</button>
+        <button className="login-button" onClick={() => setShowLogin(true)}>Log In</button>
       </nav>
 
       {/* Hero Section */}
@@ -25,11 +27,42 @@ export default function LandingPage() {
         <div className="hero-card">
           <h2>Welcome to Our Website</h2>
           <p>A Platform where people can display their skills and art</p>
-          <Link to="/home">
-            <button className="cta-button">Get Started</button>
-          </Link>
+          <button className="cta-button" onClick={() => setShowSignUp(true)}>Get Started</button>
         </div>
       </section>
+
+      {/* ================= LOGIN POPUP ================= */}
+      {showLogin && (
+        <div className="modal-overlay" onClick={() => setShowLogin(false)}>
+          <div className="login-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" />
+            <input type="password" placeholder="Password" />
+            <button className="modal-btn">Log In</button>
+            <p className="signup-text">
+              Don't have an account?{" "}
+              <span onClick={() => { setShowLogin(false); setShowSignUp(true); }} style={{ cursor: "pointer", color: "#646cff", fontWeight: "bold" }}>
+                Sign Up
+              </span>
+            </p>
+            <button className="close-btn" onClick={() => setShowLogin(false)}>✖</button>
+          </div>
+        </div>
+      )}
+
+      {/* ================= SIGNUP POPUP ================= */}
+      {showSignUp && (
+        <div className="modal-overlay" onClick={() => setShowSignUp(false)}>
+          <div className="login-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="Username" />
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button className="modal-btn">Sign Up</button>
+            <button className="close-btn" onClick={() => setShowSignUp(false)}>✖</button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
