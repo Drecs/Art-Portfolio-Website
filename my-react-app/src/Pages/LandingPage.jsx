@@ -7,9 +7,48 @@ export default function LandingPage() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
+  // ===== Signup state =====
+  const [suUsername, setSuUsername] = useState("");
+  const [suEmail, setSuEmail] = useState("");
+  const [suPassword, setSuPassword] = useState("");
+
+  // ===== SIGNUP HANDLER =====
+  const handleSignup = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: suUsername,
+          email: suEmail,
+          password: suPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Signup failed");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      alert("Signup successful 🎉");
+
+      setShowSignUp(false);
+      setSuUsername("");
+      setSuEmail("");
+      setSuPassword("");
+
+    } catch (err) {
+      alert("Server error");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="landing-page" style={{ backgroundImage: `url(${bgImage})` }}>
-      
+
       {/* Navbar */}
       <nav className="navbar">
         <h1 className="brand">LokinMedia</h1>
@@ -55,11 +94,35 @@ export default function LandingPage() {
         <div className="modal-overlay" onClick={() => setShowSignUp(false)}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Sign Up</h2>
-            <input type="text" placeholder="Username" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button className="modal-btn">Sign Up</button>
-            <button className="close-btn" onClick={() => setShowSignUp(false)}>✖</button>
+
+            <input
+              type="text"
+              placeholder="Username"
+              value={suUsername}
+              onChange={(e) => setSuUsername(e.target.value)}
+            />
+
+            <input
+              type="email"
+              placeholder="Email"
+              value={suEmail}
+              onChange={(e) => setSuEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={suPassword}
+              onChange={(e) => setSuPassword(e.target.value)}
+            />
+
+            <button className="modal-btn" onClick={handleSignup}>
+              Sign Up
+            </button>
+
+            <button className="close-btn" onClick={() => setShowSignUp(false)}>
+              ✖
+            </button>
           </div>
         </div>
       )}
