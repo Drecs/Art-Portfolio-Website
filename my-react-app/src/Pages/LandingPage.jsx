@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../index.css";
 import bgImage from "../assets/backgroundimage.jpg";
+import { toast } from "react-toastify";
 
 export default function LandingPage() {
   const [showLogin, setShowLogin] = useState(false);
@@ -28,12 +29,12 @@ export default function LandingPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Signup failed");
+        toast.error(data.message || "Signup failed");
         return;
       }
 
       localStorage.setItem("token", data.token);
-      alert("Signup successful 🎉");
+      toast.success("Signup successfull");
 
       setShowSignUp(false);
       setSuUsername("");
@@ -41,7 +42,7 @@ export default function LandingPage() {
       setSuPassword("");
 
     } catch (err) {
-      alert("Server error");
+      toast.error("Server unreachable. Try again later.");
       console.error(err);
     }
   };

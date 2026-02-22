@@ -6,28 +6,38 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        // Check existing user
-        const userExists = await prisma.user.findUnique({
+        if (!username || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        //  Only check email
+        const emailExists = await prisma.user.findUnique({
             where: { email }
         });
-        if (userExists) return res.status(400).json({ message: "User with that Email already exists" });
 
-        // Hash password
+        if (emailExists) {
+            return res.status(400).json({ message: "Email already in use" });
+        }
+
         const hashed = await bcrypt.hash(password, 10);
 
-        // Create user
         const user = await prisma.user.create({
             data: { username, email, password: hashed }
         });
 
-        // Return JWT
-        res.json({
+        res.status(201).json({
             message: "User registered successfully",
             token: generateToken(user),
         });
 
     } catch (error) {
-        console.error(error)
+        if (error.code === "P2002") {
+            return res.status(400).json({
+                message: "Email already exists"
+            });
+        }
+
+        console.error(error);
         res.status(500).json({ message: "Server Error" });
     }
 };
