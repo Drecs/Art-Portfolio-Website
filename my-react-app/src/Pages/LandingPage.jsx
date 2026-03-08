@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 export default function LandingPage() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   // ===== Signup state =====
   const [suUsername, setSuUsername] = useState("");
@@ -34,7 +36,7 @@ export default function LandingPage() {
       }
 
       localStorage.setItem("token", data.token);
-      toast.success("Signup successfull");
+      toast.success("Signup successful");
 
       setShowSignUp(false);
       setSuUsername("");
@@ -45,6 +47,49 @@ export default function LandingPage() {
       toast.error("Server unreachable. Try again later.");
       console.error(err);
     }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: loginEmail,
+          password: loginPassword,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Login failed");
+        return;
+      }
+
+      // Save token
+      localStorage.setItem("token", data.token);
+
+      toast.success("Welcome back!");
+
+      // close modal
+      setShowLogin(false);
+
+      // clear inputs
+      setLoginEmail("");
+      setLoginPassword("");
+
+    } catch (error) {
+      toast.error("Server unreachable");
+      console.error(error);
+    }
+  };
+
+  const clearLoginFields = () => {
+    setLoginEmail("");
+    setLoginPassword("");
   };
 
   return (
@@ -76,23 +121,48 @@ export default function LandingPage() {
         <div className="modal-overlay" onClick={() => setShowLogin(false)}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Login</h2>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
-            <button className="modal-btn">Log In</button>
+            <input
+              type="email"
+              placeholder="Email"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+            />
+            <button className="modal-btn" onClick={handleLogin}>
+              Log In
+            </button>
             <p className="signup-text">
               Don't have an account?{" "}
-              <span onClick={() => { setShowLogin(false); setShowSignUp(true); }} style={{ cursor: "pointer", color: "#646cff", fontWeight: "bold" }}>
+              <span onClick={() => { setShowLogin(false); setShowSignUp(true); clearLoginFields(); }}
+                style={{ cursor: "pointer", color: "#646cff", fontWeight: "bold" }}>
                 Sign Up
               </span>
             </p>
-            <button className="close-btn" onClick={() => setShowLogin(false)}>✖</button>
+            <button
+              className="close-btn"
+              onClick={() => {
+                setShowLogin(false);
+                clearLoginFields();
+              }}
+            >
+              ✖
+            </button>
           </div>
         </div>
       )}
 
       {/* ================= SIGNUP POPUP ================= */}
       {showSignUp && (
-        <div className="modal-overlay" onClick={() => setShowSignUp(false)}>
+        <div className="modal-overlay" onClick={() => {
+          setShowLogin(false);
+          clearLoginFields();
+        }}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Sign Up</h2>
 
