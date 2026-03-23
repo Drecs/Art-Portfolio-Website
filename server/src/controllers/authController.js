@@ -6,6 +6,15 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
+        //  Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({
+                message: "Please enter a valid email address"
+            });
+        }
+
         if (!username || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
@@ -67,5 +76,24 @@ exports.login = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: "Server Error" });
+    }
+};
+
+exports.createPortfolio = async (req, res) => {
+    try {
+        const { title, description } = req.body;
+
+        const portfolio = await prisma.portfolio.create({
+            data: {
+                title,
+                description,
+                userId: req.user.id,
+            },
+        });
+
+        res.json(portfolio);
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
     }
 };

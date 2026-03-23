@@ -17,6 +17,19 @@ export default function LandingPage() {
 
   // ===== SIGNUP HANDLER =====
   const handleSignup = async () => {
+    //  Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(suEmail)) {
+      toast.error("Enter a valid email address");
+      return;
+    }
+
+    if (!suUsername || !suEmail || !suPassword) {
+      toast.error("All fields are required");
+      return;
+    }
+
     try {
       const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
@@ -77,9 +90,12 @@ export default function LandingPage() {
       // close modal
       setShowLogin(false);
 
-      // clear inputs
+      // clear login and signup inputs
       setLoginEmail("");
       setLoginPassword("");
+      setSuUsername("");
+      setSuEmail("");
+      setSuPassword("");
 
     } catch (error) {
       toast.error("Server unreachable");
@@ -90,6 +106,9 @@ export default function LandingPage() {
   const clearLoginFields = () => {
     setLoginEmail("");
     setLoginPassword("");
+    setSuUsername("");
+    setSuEmail("");
+    setSuPassword("");
   };
 
   return (
@@ -118,7 +137,7 @@ export default function LandingPage() {
 
       {/* ================= LOGIN POPUP ================= */}
       {showLogin && (
-        <div className="modal-overlay" onClick={() => setShowLogin(false)}>
+        <div className="modal-overlay" onClick={() => { setShowLogin(false); clearLoginFields(); }}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Login</h2>
             <input
@@ -159,10 +178,9 @@ export default function LandingPage() {
 
       {/* ================= SIGNUP POPUP ================= */}
       {showSignUp && (
-        <div className="modal-overlay" onClick={() => {
-          setShowLogin(false);
-          clearLoginFields();
-        }}>
+        <div className="modal-overlay" onClick={() =>
+          setShowLogin(false)
+        }>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <h2>Sign Up</h2>
 
@@ -191,7 +209,7 @@ export default function LandingPage() {
               Sign Up
             </button>
 
-            <button className="close-btn" onClick={() => setShowSignUp(false)}>
+            <button className="close-btn" onClick={() => { setShowSignUp(false); clearLoginFields(); }}>
               ✖
             </button>
           </div>

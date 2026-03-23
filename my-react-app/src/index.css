@@ -137,7 +137,8 @@ button:hover,
   height: 100%;
   background: rgba(0, 0, 0, 0.65);
   display: flex;
-  justify-content: flex-end; /* right-top corner */
+  justify-content: flex-end;
+  /* right-top corner */
   align-items: flex-start;
   padding: 80px 30px 0 0;
   z-index: 999;
@@ -155,7 +156,7 @@ button:hover,
   text-align: center;
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* Modal header */
@@ -172,7 +173,7 @@ button:hover,
   border-radius: 8px;
   border: none;
   outline: none;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
@@ -220,13 +221,25 @@ button:hover,
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-10px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 
@@ -691,4 +704,188 @@ button:hover,
 .submit-button:hover {
   background-color: #4a50e0;
   transform: scale(1.05);
+}
+
+
+
+/* ==========================
+   PORTFOLIO MODAL OVERLAY
+========================== */
+/* MAIN MODAL */
+.portfolio-modal {
+  background: rgba(0, 0, 0, 0.9);
+  width: 600px;
+  max-width: 90%;
+  height: 90vh;
+  /* 👈 fixed height */
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  /* 👈 IMPORTANT */
+  color: white;
+  position: relative;
+}
+
+.portfolio-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  /* 👈 THIS centers modal */
+  justify-content: center;
+  /* horizontal center */
+  align-items: center;
+  /* vertical center */
+
+  z-index: 1000;
+}
+
+/* HEADER */
+.modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+/* SCROLLABLE BODY */
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  /* 👈 THIS MAKES ONLY FORM SCROLL */
+  flex: 1;
+  /* 👈 takes remaining space */
+}
+
+/* FOOTER */
+.modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Scrollbar styling (optional 🔥) */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #646cff;
+  border-radius: 10px;
+}
+
+/* ==========================
+   FORM GROUP
+========================== */
+.form-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.create-btn-large {
+  flex: 1;
+  padding: 0.9rem;
+  background: #646cff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-btn-large:hover {
+  background: #4a50e0;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 0.9rem;
+  background: transparent;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.preview-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.preview-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
