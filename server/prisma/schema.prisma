@@ -36,9 +36,20 @@ model Portfolio {
   id          Int      @id @default(autoincrement())
   title       String
   description String?
+  profilePic  String?   //  store image URL/path
   createdAt   DateTime @default(now())
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
+
+  samples PortfolioImage[]  //  relation for multiple images
+}
+
+model PortfolioImage {
+  id          Int      @id @default(autoincrement())
+  imageUrl    String
+
+  portfolioId Int
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
 }
 
