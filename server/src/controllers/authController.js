@@ -79,21 +79,3 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.createPortfolio = async (req, res) => {
-    try {
-        const { title, description } = req.body;
-
-        const portfolio = await prisma.portfolio.create({
-            data: {
-                title,
-                description,
-                userId: req.user.id,
-            },
-        });
-
-        res.json(portfolio);
-
-    } catch (error) {
-        res.status(500).json({ message: "Server error" });
-    }
-};

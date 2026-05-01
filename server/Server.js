@@ -5,14 +5,17 @@ require("dotenv").config({ path: path.resolve(__dirname, "../.env") }); // load 
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./src/routes/authRoutes");
+const portfolioRoutes = require("./src/routes/portfolioRoutes");
 
 const app = express();
+
 
 app.use(cors());
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/portfolio", portfolioRoutes);
 
 app.get("/", (req, res) => res.send("API is running"));
 
