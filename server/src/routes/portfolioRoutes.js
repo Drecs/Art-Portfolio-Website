@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { createPortfolio } = require("../controllers/portfolioController");
 const authMiddleware = require("../utils/decodeToken");
-const upload = require("../middleware/upload");
+const upload = require("../middlewares/upload");
 
 router.post(
     "/",

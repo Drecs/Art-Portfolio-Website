@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const { register, login, createPortfolio,
-
+const { register, login,
 } = require("../controllers/authController");
+
+
 
 router.post("/signup", register);
 router.post("/login", login);
-router.post("/portfolio", createPortfolio);
+
 
 module.exports = router;

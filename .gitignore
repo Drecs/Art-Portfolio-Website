@@ -8,6 +8,8 @@ my-react-app/.env
 node_modules/
 /generated/prisma
 server/node_modules/
+server/uploads/
+
 
 
 # Prisma generated client files
