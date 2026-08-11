@@ -39,6 +39,11 @@ export default function Portfolio() {
     setSamples([]);
   };
 
+  const closePortfolioModal = () => {
+    setShowCreatePortfolio(false);
+    resetPortfolioForm();
+  };
+
 
 
   // ===== CREATE PORTFOLIO =====
@@ -49,7 +54,10 @@ export default function Portfolio() {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("profilePic", profilePic);
+
+      if (profilePic) {
+        formData.append("profilePic", profilePic);
+      }
 
       samples.forEach((file) => {
         formData.append("samples", file);
@@ -70,14 +78,17 @@ export default function Portfolio() {
         return;
       }
 
-      toast.success("Portfolio created!");
-      setShowCreatePortfolio(false);
+      toast.success("Portfolio created successfully!");
+
+      // Close modal AND clear all form data
+      closePortfolioModal();
 
     } catch (err) {
       toast.error("Server error");
       console.error(err);
     }
   };
+
 
   return (
     <Layout>
@@ -158,14 +169,14 @@ export default function Portfolio() {
       {showCreatePortfolio && (
         <div
           className="portfolio-modal-overlay"
-          onClick={() => {
-            setShowCreatePortfolio(false);
-            resetPortfolioForm();
-          }}
+          onClick={closePortfolioModal}
         >
-          <div className="portfolio-modal" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="portfolio-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
 
-            {/* HEADER (fixed) */}
+            {/* HEADER */}
             <div className="modal-header">
               <h2>Create Your Portfolio</h2>
             </div>
@@ -175,6 +186,7 @@ export default function Portfolio() {
 
               <div className="form-group">
                 <label>Portfolio Title</label>
+
                 <input
                   type="text"
                   value={title}
@@ -182,35 +194,44 @@ export default function Portfolio() {
                 />
               </div>
 
+              {/* PROFILE PICTURE */}
               <div className="form-group">
                 <label>Profile Picture</label>
+
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setProfilePic(e.target.files[0])}
+                  onChange={(e) => {
+                    setProfilePic(e.target.files[0]);
+                  }}
                 />
 
                 {profilePic && (
                   <img
                     src={URL.createObjectURL(profilePic)}
-                    alt="preview"
+                    alt="Profile preview"
                     className="preview-img"
                   />
                 )}
               </div>
 
+              {/* DESCRIPTION */}
               <div className="form-group">
                 <label>Description</label>
+
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
 
+              {/* SAMPLE IMAGES */}
               <div className="form-group">
                 <label>Sample Images</label>
+
                 <input
                   type="file"
+                  accept="image/*"
                   multiple
                   onChange={(e) => {
                     const files = Array.from(e.target.files);
@@ -224,7 +245,7 @@ export default function Portfolio() {
                       <img
                         key={i}
                         src={URL.createObjectURL(file)}
-                        alt="preview"
+                        alt={`Sample ${i + 1}`}
                         className="preview-img"
                       />
                     ))}
@@ -234,32 +255,33 @@ export default function Portfolio() {
 
             </div>
 
-            {/* FOOTER (fixed) */}
+            {/* FOOTER */}
             <div className="modal-footer">
-              <button className="create-btn-large" onClick={handleCreatePortfolio}>
+
+              <button
+                className="create-btn-large"
+                onClick={handleCreatePortfolio}
+              >
                 Create Portfolio
               </button>
 
               <button
                 className="cancel-btn"
-                onClick={() => {
-                  setShowCreatePortfolio(false);
-                  resetPortfolioForm();
-                }}
+                onClick={closePortfolioModal}
               >
                 Cancel
               </button>
+
             </div>
 
+            {/* X BUTTON */}
             <button
               className="close-btn"
-              onClick={() => {
-                setShowCreatePortfolio(false);
-                resetPortfolioForm();
-              }}
+              onClick={closePortfolioModal}
             >
               ✖
             </button>
+
           </div>
         </div>
       )}
