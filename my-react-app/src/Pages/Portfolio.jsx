@@ -51,7 +51,15 @@ export default function Portfolio() {
     try {
       const token = localStorage.getItem("token");
 
+      // No token at all
+      if (!token) {
+        toast.info("Please login first");
+        setShowLogin(true);
+        return;
+      }
+
       const formData = new FormData();
+
       formData.append("title", title);
       formData.append("description", description);
 
@@ -63,29 +71,60 @@ export default function Portfolio() {
         formData.append("samples", file);
       });
 
-      const res = await fetch("http://localhost:5000/api/portfolio", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const res = await fetch(
+        "http://localhost:5000/api/portfolio",
+        {
+          method: "POST",
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+
+          body: formData,
+        }
+      );
 
       const data = await res.json();
 
-      if (!res.ok) {
-        toast.error(data.message || "Failed to create portfolio");
+      // =========================
+      // AUTHENTICATION ERROR
+      // =========================
+      if (res.status === 401) {
+        localStorage.removeItem("token");
+
+        closePortfolioModal();
+
+        toast.info("Your session has expired. Please login again.");
+
+        setShowLogin(true);
+
         return;
       }
 
+      // =========================
+      // OTHER ERRORS
+      // =========================
+      if (!res.ok) {
+        toast.error(
+          data.message || "Failed to create portfolio"
+        );
+
+        return;
+      }
+
+      // =========================
+      // SUCCESS
+      // =========================
       toast.success("Portfolio created successfully!");
 
-      // Close modal AND clear all form data
       closePortfolioModal();
 
     } catch (err) {
-      toast.error("Server error");
       console.error(err);
+
+      toast.error(
+        "Unable to connect to the server."
+      );
     }
   };
 
