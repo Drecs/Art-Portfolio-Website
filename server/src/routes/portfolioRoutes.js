@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { createPortfolio } = require("../controllers/portfolioController");
+const { createPortfolio,
+    getPortfolios,
+} = require("../controllers/portfolioController");
 const authMiddleware = require("../utils/decodeToken");
 const upload = require("../middlewares/upload");
+
+// Display portfolios
+router.get("/", getPortfolios);
 
 router.post(
     "/",

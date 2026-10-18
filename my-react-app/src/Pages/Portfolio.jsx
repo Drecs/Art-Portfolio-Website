@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import "../index.css";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ export default function Portfolio() {
   // ===== AUTH STATE (reuse logic) =====
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+
 
   const isLoggedIn = () => {
     return !!localStorage.getItem("token");
@@ -19,6 +20,8 @@ export default function Portfolio() {
   const [description, setDescription] = useState("");
   const [profilePic, setProfilePic] = useState(null);
   const [samples, setSamples] = useState([]);
+  const [portfolios, setPortfolios] = useState([]);
+  const [loadingPortfolios, setLoadingPortfolios] = useState(true);
 
   // ===== HANDLE CREATE CLICK =====
   const handleCreateClick = () => {
@@ -43,6 +46,30 @@ export default function Portfolio() {
     setShowCreatePortfolio(false);
     resetPortfolioForm();
   };
+
+
+
+  const fetchPortfolios = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/portfolio");
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to load portfolios");
+      }
+
+      setPortfolios(data);
+    } catch (error) {
+      console.error("Error fetching portfolios:", error);
+      toast.error("Could not load portfolios");
+    } finally {
+      setLoadingPortfolios(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPortfolios();
+  }, []);
 
 
 
@@ -118,6 +145,9 @@ export default function Portfolio() {
       toast.success("Portfolio created successfully!");
 
       closePortfolioModal();
+
+      // Refresh the portfolio list
+      await fetchPortfolios();
 
     } catch (err) {
       console.error(err);
@@ -324,6 +354,61 @@ export default function Portfolio() {
           </div>
         </div>
       )}
+
+      {/* ================= PORTFOLIO POSTS ================= */}
+
+      <div className="portfolio-feed">
+        {loadingPortfolios ? (
+          <p>Loading portfolios...</p>
+        ) : portfolios.length === 0 ? (
+          <p>No portfolios have been created yet.</p>
+        ) : (
+          portfolios.map((portfolio) => (
+            <div className="portfolio-post" key={portfolio.id}>
+
+              {/* POST HEADER */}
+              <div className="portfolio-post-header">
+                <img
+                  src={
+                    portfolio.profilePic
+                      ? `http://localhost:5000/uploads/${portfolio.profilePic}`
+                      : "https://placehold.co/60x60?text=User"
+                  }
+                  alt={portfolio.user?.username || "Profile"}
+                  className="post-profile-pic"
+                />
+
+                <div className="post-user-info">
+                  <h3>{portfolio.user?.username || "Unknown User"}</h3>
+                  <h4>{portfolio.title}</h4>
+                </div>
+              </div>
+
+              {/* DESCRIPTION */}
+              {portfolio.description && (
+                <p className="post-description">
+                  {portfolio.description}
+                </p>
+              )}
+
+              {/* SAMPLE IMAGES */}
+              {portfolio.images?.length > 0 && (
+                <div className="post-image-grid">
+                  {portfolio.images.map((image) => (
+                    <img
+                      key={image.id}
+                      src={`http://localhost:5000/uploads/${image.imageUrl}`}
+                      alt={`${portfolio.title} sample`}
+                      className="post-image"
+                    />
+                  ))}
+                </div>
+              )}
+
+            </div>
+          ))
+        )}
+      </div>
 
     </Layout>
   );

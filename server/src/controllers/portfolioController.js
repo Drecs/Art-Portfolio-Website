@@ -43,3 +43,30 @@ exports.createPortfolio = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
+
+
+exports.getPortfolios = async (req, res) => {
+    try {
+        const portfolios = await prisma.portfolio.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        username: true,
+                    },
+                },
+                images: true,
+            },
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+
+        res.json(portfolios);
+    } catch (error) {
+        console.error("Error fetching portfolios:", error);
+        res.status(500).json({
+            message: "Failed to fetch portfolios",
+        });
+    }
+};

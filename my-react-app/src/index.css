@@ -367,11 +367,13 @@ button:hover,
 /* ====== PORTFOLIO PAGE LAYOUT ====== */
 
 .portfolio-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
   padding: 2rem;
-  max-width: 1100px;
+  width: 100%;
+  box-sizing: border-box;
   margin: auto;
 }
 
@@ -403,6 +405,9 @@ button:hover,
    CREATE NEW PORTFOLIO CARD
 =========================== */
 .create-portfolio {
+  width: 100%;
+  max-width: 750px;
+  box-sizing: border-box;
   text-align: center;
 }
 
@@ -888,4 +893,89 @@ button:hover,
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 10px;
+}
+
+/* Portfolio feed */
+.portfolio-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 750px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* Individual portfolio post */
+.portfolio-post {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* Profile picture and title */
+.portfolio-post-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.post-profile-pic {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #eee;
+}
+
+.post-user-info h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.post-user-info h4 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Portfolio description */
+.post-description {
+  margin: 0 0 16px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Images inside a post */
+.post-image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.post-image {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f2f2f2;
+}
+
+@media (max-width: 600px) {
+  .portfolio-post {
+    padding: 14px;
+  }
+
+  .post-image {
+    height: 180px;
+  }
 }
