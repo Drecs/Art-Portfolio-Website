@@ -245,69 +245,103 @@ button:hover,
 
 
 
-/* ===== HOME PAGE CONTAINER ===== */
+/* ===== HOME PAGE LAYOUT ===== */
 .home-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* ===== POST CARD ===== */
-.post-card {
+/* ===== CREATE POST CARD ===== */
+.create-post-card {
+  width: 100%;
+  max-width: 750px;
+  min-height: 300px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+
+  padding: 2rem;
   background: rgba(255, 255, 255, 0.12);
-  /* light card */
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 18px;
-  padding: 1rem;
+  color: white;
   backdrop-filter: blur(6px);
-  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.25s ease, background 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  transition: 0.25s ease;
 }
 
-.post-card:hover {
+.create-post-card:hover {
+  background: rgba(255, 255, 255, 0.16);
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.15);
 }
 
-/* ===== PROFILE ROW ===== */
-.profile-section {
+/* Icon */
+.create-post-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.profile-pic {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
+  justify-content: center;
+  background: rgba(100, 108, 255, 0.15);
   border: 2px solid #646cff;
+  color: #646cff;
+  font-size: 2.5rem;
 }
 
-.profile-name {
-  font-weight: 600;
-  font-size: 1rem;
+/* Text */
+.create-post-title {
+  margin: 0;
+  font-size: 1.4rem;
   color: black;
 }
 
-/* ===== POST IMAGE ===== */
-.post-image {
-  width: 100%;
-  border-radius: 10px;
-  margin: 0.75rem 0;
-  object-fit: cover;
+.create-post-description {
+  margin: 0;
+  color: black;
+  opacity: 0.8;
+  line-height: 1.5;
 }
 
-/* ===== POST DESCRIPTION ===== */
-.post-description {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: black;
+/* Plus button */
+.create-post-button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #646cff;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.create-post-button:hover {
+  background: #4a50e0;
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .create-post-card {
+    min-height: 280px;
+    padding: 1.5rem;
+  }
 }
 
 /* Optional: Make text black for the whole page */
