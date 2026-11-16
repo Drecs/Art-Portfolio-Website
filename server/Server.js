@@ -6,6 +6,7 @@ const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./src/routes/authRoutes");
 const portfolioRoutes = require("./src/routes/portfolioRoutes");
+const postRoutes = require("./src/routes/postRoutes");
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/portfolio", portfolioRoutes);
+app.use("/api/posts", postRoutes);
+
 
 app.get("/", (req, res) => res.send("API is running"));
 

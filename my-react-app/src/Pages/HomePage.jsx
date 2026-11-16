@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Layout from "./Layout";
 import "../index.css";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
   const [showCreatePost, setShowCreatePost] = useState(false);
@@ -19,9 +20,56 @@ export default function HomePage() {
   };
 
   const handleCreatePost = async () => {
-    // Connect this handler to your backend when the post API is ready.
-    console.log({ description, images });
-    closePostModal();
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        toast.error("Please login before creating a post.");
+        return;
+      }
+
+      if (!description.trim()) {
+        toast.error("Please enter a post description.");
+        return;
+      }
+
+      const formData = new FormData();
+
+      formData.append("description", description);
+
+      images.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      const res = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.status === 401) {
+        localStorage.removeItem("token");
+        toast.error("Your session has expired. Please login again.");
+        return;
+      }
+
+      if (!res.ok) {
+        toast.error(data.message || "Failed to create post.");
+        return;
+      }
+
+      toast.success("Post created successfully!");
+
+      closePostModal();
+
+    } catch (error) {
+      console.error("Error creating post:", error);
+      toast.error("Unable to connect to the server.");
+    }
   };
 
   return (

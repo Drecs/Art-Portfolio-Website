@@ -24,13 +24,22 @@ model User {
 
 model Post {
   id          Int      @id @default(autoincrement())
-  description String
-  image       String?
+  description String  
   createdAt   DateTime @default(now())
 
   userId Int
   user   User   @relation(fields: [userId], references: [id])
+
+  images      PostImage[]
 }
+
+model PostImage {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+}
+
 
 model Portfolio {
   id          Int      @id @default(autoincrement())
@@ -52,4 +61,7 @@ model PortfolioImage {
   portfolioId Int
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id])
 }
+
+
+
 
